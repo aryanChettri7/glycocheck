@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlycoCheck India - Advanced Microvascular Health Technology</title>
+    <meta name="description" content="GlycoCheck India offers non-invasive AI-based capillary health analysis, Revasca plant-based supplements, and comprehensive health consultation services.">
+
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- AOS (Animate on Scroll) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+    <style>
+        /* Custom CSS Variables (for gradients and specific non-Tailwindable styles) */
+        :root {
+            --primary-teal: #008B8B;
+            --primary-blue: #2E86AB;
+            --light-blue: #A23B72; /* Not used in Tailwind conversion, but kept for reference */
+            --accent-teal: #20B2AA;
+            --soft-white: #FAFAFA;
+            --text-dark: #2C3E50;
+            --text-light: #7F8C8D;
+            --shadow-color: rgba(0, 139, 139, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--soft-white);
+        }
+
+        /* Custom gradients for backgrounds and icons where Tailwind defaults aren't enough */
+        .bg-gradient-hero {
+            background: linear-gradient(135deg, rgba(0, 139, 139, 0.9), rgba(46, 134, 171, 0.8)), url('https://placehold.co/1920x1080/008B8B/FFFFFF?text=Microvascular+Health') center/cover;
+            background-attachment: fixed; /* Added for parallax effect */
+        }
+
+        .bg-gradient-cta {
+            background: linear-gradient(45deg, var(--accent-teal), var(--primary-blue));
+        }
+
+        .bg-gradient-feature-icon {
+            background: linear-gradient(45deg, var(--primary-teal), var(--accent-teal));
+        }
+
+        .bg-gradient-service-icon {
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-teal));
+        }
+
+        .bg-gradient-contact {
+            background: linear-gradient(135deg, var(--primary-teal), var(--primary-blue));
+        }
+
+        /* Navbar backdrop effect */
+        .navbar-blur {
+            backdrop-filter: blur(10px);
+        }
+
+        /* AOS Animation Classes (kept as is, as they are external library specific) */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in-up.aos-animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading and Message Styles */
+        .loading {
+            display: none;
+            color: var(--primary-teal);
+        }
+
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error-message {
+            display: none;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-4 bg-white bg-opacity-95 shadow-lg transition-all duration-300 ease-in-out navbar-blur" id="main-navbar">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a class="text-2xl font-bold text-primary-teal flex items-center" href="#home">
+                <i class="fas fa-heartbeat mr-2"></i>GlycoCheck India
+            </a>
+            <button class="lg:hidden text-text-dark focus:outline-none" id="navbar-toggler">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            <div class="hidden lg:flex flex-grow justify-end" id="navbarNav">
+                <ul class="flex flex-col lg:flex-row items-center space-y-4 lg:space-y-0 lg:space-x-8">
+                    <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300" href="#home">Home</a></li>
+                    <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300" href="#glycocheck">GlycoCheck</a></li>
+                    <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300" href="#revasca">Revasca</a></li>
+                    <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300" href="#services">Services</a></li>
+                    <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Mobile Navigation Menu -->
+        <div class="lg:hidden hidden mt-4 bg-white bg-opacity-95 shadow-md rounded-b-lg" id="mobile-nav-menu">
+            <ul class="flex flex-col items-center py-4 space-y-4">
+                <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300 py-2 block" href="#home">Home</a></li>
+                <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300 py-2 block" href="#glycocheck">GlycoCheck</a></li>
+                <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300 py-2 block" href="#revasca">Revasca</a></li>
+                <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300 py-2 block" href="#services">Services</a></li>
+                <li><a class="text-text-dark font-medium hover:text-primary-teal transition-colors duration-300 py-2 block" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center text-white bg-gradient-hero">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary-teal to-primary-blue opacity-80"></div>
+        <div class="container mx-auto px-4 relative z-10 py-20">
+            <div class="max-w-3xl hero-content">
+                <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight animate__animated animate__fadeInUp text-shadow-md">
+                    Advanced Microvascular Health Technology
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 font-light animate__animated animate__fadeInUp animate__delay-1s">
+                    Discover the future of preventive healthcare with GlycoCheck's AI-based capillary analysis,
+                    plant-based Revasca supplements, and comprehensive health consultation services.
+                </p>
+                <a href="#contact" class="inline-block bg-gradient-cta text-white py-4 px-8 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 animate__animated animate__fadeInUp animate__delay-2s">
+                    <i class="fas fa-calendar-check mr-2"></i>Book Consultation
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is GlycoCheck Section -->
+    <section id="glycocheck" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-primary-teal mb-4" data-aos="fade-up">What is GlycoCheck?</h2>
+                <p class="text-lg text-text-light mx-auto max-w-2xl" data-aos="fade-up" data-aos-delay="100">
+                    Revolutionary non-invasive AI-based technology for comprehensive capillary health analysis
+                </p>
+            </div>
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-20 h-20 bg-gradient-feature-icon rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl shadow-md">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-primary-blue mb-2">AI-Powered Analysis</h4>
+                        <p class="text-text-light">Advanced artificial intelligence algorithms analyze microvascular patterns with precision and accuracy.</p>
+                    </div>
+                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-20 h-20 bg-gradient-feature-icon rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl shadow-md">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-primary-blue mb-2">Non-Invasive Testing</h4>
+                        <p class="text-text-light">Completely painless and safe testing procedure with no needles or invasive methods required.</p>
+                    </div>
+                    <div class="text-center p-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-20 h-20 bg-gradient-feature-icon rounded-full flex items-center justify-center mx-auto mb-4 text-white text-3xl shadow-md">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4 class="text-xl font-semibold text-primary-blue mb-2">Real-Time Results</h4>
+                        <p class="text-text-light">Instant analysis and comprehensive reports delivered immediately after your session.</p>
+                    </div>
+                </div>
+                <div class="lg:w-1/3 mt-8 lg:mt-0">
+                    <img src="https://placehold.co/600x400/2E86AB/FFFFFF?text=Medical+Technology"
+                         alt="Medical Technology"
+                         class="w-full h-auto rounded-xl shadow-2xl"
+                         data-aos="fade-left"
+                         data-aos-delay="200">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Revasca Section -->
+    <section id="revasca" class="py-20 bg-gradient-to-br from-accent-teal-50 to-primary-blue-50">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/3">
+                    <img src="https://placehold.co/600x400/A23B72/FFFFFF?text=Wellness+Consultation"
+                         alt="Wellness Consultation"
+                         class="w-full h-auto rounded-xl shadow-2xl"
+                         data-aos="fade-right"
+                         data-aos-delay="200">
+                </div>
+                <div class="lg:w-2/3 mt-8 lg:mt-0">
+                    <h2 class="text-4xl font-bold text-primary-teal mb-4 text-center lg:text-left" data-aos="fade-up">About Revasca</h2>
+                    <p class="text-lg text-text-light mx-auto max-w-2xl lg:mx-0 mb-12 text-center lg:text-left" data-aos="fade-up" data-aos-delay="100">
+                        Premium plant-based supplements designed to support optimal vascular health and circulation
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="p-6 text-center md:text-left" data-aos="fade-up" data-aos-delay="200">
+                            <div class="w-20 h-20 bg-gradient-feature-icon rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4 text-white text-3xl shadow-md">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary-blue mb-2">100% Plant-Based</h4>
+                            <p class="text-text-light">Natural ingredients sourced from premium botanical extracts for optimal bioavailability.</p>
+                        </div>
+                        <div class="p-6 text-center md:text-left" data-aos="fade-up" data-aos-delay="300">
+                            <div class="w-20 h-20 bg-gradient-feature-icon rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4 text-white text-3xl shadow-md">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary-blue mb-2">Vascular Support</h4>
+                            <p class="text-text-light">Clinically researched formula to enhance circulation and support cardiovascular health.</p>
+                        </div>
+                        <div class="p-6 text-center md:text-left" data-aos="fade-up" data-aos-delay="400">
+                            <div class="w-20 h-20 bg-gradient-feature-icon rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4 text-white text-3xl shadow-md">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary-blue mb-2">Quality Assured</h4>
+                            <p class="text-text-light">Manufactured in GMP-certified facilities with rigorous quality control standards.</p>
+                        </div>
+                        <div class="p-6 text-center md:text-left" data-aos="fade-up" data-aos-delay="500">
+                            <div class="w-20 h-20 bg-gradient-feature-icon rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4 text-white text-3xl shadow-md">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary-blue mb-2">Doctor Recommended</h4>
+                            <p class="text-text-light">Trusted by healthcare professionals and backed by scientific research.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-primary-teal mb-4" data-aos="fade-up">Our Services</h2>
+                <p class="text-lg text-text-light mx-auto max-w-2xl" data-aos="fade-up" data-aos-delay="100">
+                    Comprehensive healthcare solutions tailored to your individual needs
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl p-8 text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 h-full service-card-hover" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-24 h-24 bg-gradient-service-icon rounded-full flex items-center justify-center mx-auto mb-6 text-white text-4xl shadow-md">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-primary-teal mb-4">Microvascular Testing</h4>
+                    <p class="text-text-light mb-4">Comprehensive GlycoCheck analysis to assess your capillary health and detect early signs of vascular complications.</p>
+                    <ul class="list-none text-left space-y-2">
+                        <li class="flex items-center text-text-dark"><i class="fas fa-check text-green-500 mr-2"></i>AI-powered analysis</li>
+                        <li class="flex items-center text-text-dark"><i class="fas fa-check text-green-500 mr-2"></i>Detailed health report</li>
+                        <li class="flex items-center text-text-dark"><i class="fas fa-check text-green-500 mr-2"></i>Personalized recommendations</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 h-full service-card-hover" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-24 h-24 bg-gradient-service-icon rounded-full flex items-center justify-center mx-auto mb-6 text-white text-4xl shadow-md">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-primary-teal mb-4">Health Consultation</h4>
+                    <p class="text-text-light mb-4">Expert medical consultation with experienced healthcare professionals for comprehensive health assessment.</p>
+                    <ul class="list-none text-left space-y-2">
+                        <li class="flex items-center text-text-dark"><i class="fas fa-check text-green-500 mr-2"></i>Expert medical advice</li>
+                        <li class="flex items-center text-text-dark"><i class="fas fa-check text-green-500 mr-2"></i>Personalized treatment plans</li>
+                        <li class="flex items-center text-text-dark"><i class="fas fa-check text-green-500 mr-2"></i>Follow-up support</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-xl p-8 text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-300 h-full service-card-hover" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-24 h-24 bg-gradient-service-icon rounded-full flex items-center justify-center mx-auto mb-6 text-white text-4xl shadow-md">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h4 class="text-2xl font-semibold text-primary-teal mb-4">Monthly Care Plans</h4>
+                    <p class="text-text-light mb-4">Ongoing health monitoring and care with regular check-ups and continuous health optimization.</p>
+                    <ul class="list-none text-left space-y-2">
+                        <li class="flex items-center text-text-dark"><i class="fas fa-check text-green-500 mr-2"></i>Regular health monitoring</li>
+                        <li class="flex items-center text-text-dark"><i class="fas fa-check text-green-500 mr-2"></i>Progress tracking</li>
+                        <li class="flex items-center text-text-dark"><i class="fas fa-check text-green-500 mr-2"></i>24/7 support access</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact/Appointment Section -->
+    <section id="contact" class="py-20 bg-gradient-contact text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-white mb-4" data-aos="fade-up">Show Your Interest</h2>
+                <p class="text-lg text-white text-opacity-75 mx-auto max-w-2xl" data-aos="fade-up" data-aos-delay="100">
+                    We'd love to hear from you. Fill out the form below to show your interest and we'll get in touch.
+                </p>
+            </div>
+            <div class="flex justify-center">
+                <div class="w-full lg:w-2/3 bg-white rounded-2xl p-8 md:p-12 shadow-2xl" data-aos="fade-up" data-aos-delay="200">
+                    <form id="appointmentForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                        <!-- IMPORTANT: Replace 'YOUR_FORM_ID' with your actual Formspree form ID to enable form submissions. -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-gray-900 text-lg font-medium mb-2">Full Name <span class="text-red-500">*</span></label>
+                                <input type="text" class="w-full border-2 border-gray-200 rounded-lg py-3 px-4 text-lg focus:outline-none focus:border-primary-teal transition-colors duration-300" id="name" name="name" required>
+                                <div class="invalid-feedback text-red-500 text-sm mt-1 hidden">Please provide your full name.</div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-900 text-lg font-medium mb-2">Email Address <span class="text-red-500">*</span></label>
+                                <input type="email" class="w-full border-2 border-gray-200 rounded-lg py-3 px-4 text-lg focus:outline-none focus:border-primary-teal transition-colors duration-300" id="email" name="email" required>
+                                <div class="invalid-feedback text-red-500 text-sm mt-1 hidden">Please provide a valid email address.</div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="phone" class="block text-gray-900 text-lg font-medium mb-2">Phone Number <span class="text-red-500">*</span></label>
+                                <input type="tel" class="w-full border-2 border-gray-200 rounded-lg py-3 px-4 text-lg focus:outline-none focus:border-primary-teal transition-colors duration-300" id="phone" name="phone" required>
+                                <div class="invalid-feedback text-red-500 text-sm mt-1 hidden">Please provide your phone number.</div>
+                            </div>
+                            <div>
+                                <label for="service" class="block text-gray-900 text-lg font-medium mb-2">Service of Interest</label>
+                                <select class="w-full border-2 border-gray-200 rounded-lg py-3 px-4 text-lg focus:outline-none focus:border-primary-teal transition-colors duration-300" id="service" name="service">
+                                    <option value="">Select a service</option>
+                                    <option value="glycocheck">GlycoCheck Testing</option>
+                                    <option value="consultation">Health Consultation</option>
+                                    <option value="care-plan">Monthly Care Plan</option>
+                                    <option value="revasca">Revasca Supplements</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-8">
+                            <label for="message" class="block text-gray-900 text-lg font-medium mb-2">Message</label>
+                            <textarea class="w-full border-2 border-gray-200 rounded-lg py-3 px-4 text-lg focus:outline-none focus:border-primary-teal transition-colors duration-300" id="message" name="message" rows="4" placeholder="Tell us about your health concerns or questions..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-cta text-white py-4 px-8 text-xl font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                            <span class="submit-text">
+                                <i class="fas fa-paper-plane mr-2"></i>Submit Interest
+                            </span>
+                            <span class="loading">
+                                <i class="fas fa-spinner fa-spin mr-2"></i>Sending...
+                            </span>
+                        </button>
+                    </form>
+                    <div class="success-message mt-4 p-4 rounded-lg hidden">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        Thank you! Your interest has been submitted successfully. We'll contact you within 24 hours.
+                    </div>
+                    <div class="error-message mt-4 p-4 rounded-lg hidden">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        Sorry, there was an error submitting your form. Please try again or contact us directly.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-text-dark text-dark py-8 text-center">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="mb-4 md:mb-0">&copy; <span id="current-year"></span> GlycoCheck India. All rights reserved.</p>
+                <div class="social-links flex space-x-6">
+                    <a href="#" class="text-white hover:text-primary-teal transition-colors duration-300"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-white hover:text-primary-teal transition-colors duration-300"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="text-white hover:text-primary-teal transition-colors duration-300"><i class="fab fa-linkedin-in text-xl"></i></a>
+                    <a href="#" class="text-white hover:text-primary-teal transition-colors duration-300"><i class="fab fa-instagram text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS (Animate on Scroll) JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navbarHeight = document.getElementById('main-navbar').offsetHeight;
+                    const offsetTop = target.offsetTop - navbarHeight; // Account for fixed navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile menu if open
+                    const mobileNavMenu = document.getElementById('mobile-nav-menu');
+                    if (!mobileNavMenu.classList.contains('hidden')) {
+                        mobileNavMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('main-navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-xl', 'bg-opacity-100');
+            } else {
+                navbar.classList.remove('shadow-xl', 'bg-opacity-100');
+            }
+        });
+
+        // Mobile navigation toggler
+        const navbarToggler = document.getElementById('navbar-toggler');
+        const mobileNavMenu = document.getElementById('mobile-nav-menu');
+
+        navbarToggler.addEventListener('click', function() {
+            mobileNavMenu.classList.toggle('hidden');
+        });
+
+        // Form validation and submission
+        const form = document.getElementById('appointmentForm');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const submitText = form.querySelector('.submit-text');
+        const loading = form.querySelector('.loading');
+        const successMessage = form.querySelector('.success-message');
+        const errorMessage = form.querySelector('.error-message');
+
+        // Real-time validation
+        form.addEventListener('input', function(e) {
+            validateField(e.target);
+        });
+
+        function validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+            const feedbackElement = field.nextElementSibling; // Get the next sibling (invalid-feedback div)
+
+            // Remove previous validation classes
+            field.classList.remove('border-green-500', 'border-red-500');
+            if (feedbackElement && feedbackElement.classList.contains('invalid-feedback')) {
+                feedbackElement.classList.add('hidden');
+            }
+
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                if (feedbackElement && feedbackElement.classList.contains('invalid-feedback')) {
+                    feedbackElement.classList.remove('hidden');
+                }
+            } else if (field.type === 'email' && value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                isValid = emailRegex.test(value);
+                if (!isValid && feedbackElement && feedbackElement.classList.contains('invalid-feedback')) {
+                    feedbackElement.textContent = 'Please provide a valid email address.';
+                    feedbackElement.classList.remove('hidden');
+                }
+            } else if (field.type === 'tel' && value) {
+                const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+                isValid = phoneRegex.test(value);
+                if (!isValid && feedbackElement && feedbackElement.classList.contains('invalid-feedback')) {
+                    feedbackElement.textContent = 'Please provide a valid phone number (min 10 digits).';
+                    feedbackElement.classList.remove('hidden');
+                }
+            }
+
+            // Add validation classes
+            if (value && isValid) {
+                field.classList.add('border-green-500');
+            } else if (value && !isValid) {
+                field.classList.add('border-red-500');
+            }
+
+            return isValid;
+        }
+
+        // Form submission
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Hide previous messages
+            successMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+
+            // Validate all required fields
+            const requiredFields = form.querySelectorAll('[required]');
+            let allValid = true;
+
+            requiredFields.forEach(field => {
+                if (!validateField(field)) {
+                    allValid = false;
+                }
+            });
+
+            if (!allValid) {
+                errorMessage.textContent = 'Please fill in all required fields correctly.';
+                errorMessage.classList.remove('hidden');
+                return;
+            }
+
+            // Show loading state
+            submitText.classList.add('hidden');
+            loading.classList.remove('hidden');
+            submitBtn.disabled = true;
+
+            try {
+                // Submit form to Formspree
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Success
+                    successMessage.classList.remove('hidden');
+                    form.reset();
+
+                    // Remove validation classes
+                    form.querySelectorAll('.form-control').forEach(field => {
+                        field.classList.remove('border-green-500', 'border-red-500');
+                        const feedbackElement = field.nextElementSibling;
+                        if (feedbackElement && feedbackElement.classList.contains('invalid-feedback')) {
+                            feedbackElement.classList.add('hidden');
+                        }
+                    });
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                errorMessage.classList.remove('hidden');
+            } finally {
+                // Reset button state
+                submitText.classList.remove('hidden');
+                loading.classList.add('hidden');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Add entrance animations to hero content
+        window.addEventListener('load', function() {
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                // AOS handles this now, no need for manual opacity/transform
+            }
+        });
+
+        // Removed parallax effect for hero section as background-attachment: fixed handles it
+        // window.addEventListener('scroll', function() {
+        //     const scrolled = window.pageYOffset;
+        //     const hero = document.querySelector('.hero-parallax');
+        //     if (hero) {
+        //         hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+        //     }
+        // });
+
+        // Service card hover effects (handled by Tailwind's hover utilities and custom CSS)
+        // No additional JS needed for the transform hover effect as it's in CSS now.
+
+        // Update copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
